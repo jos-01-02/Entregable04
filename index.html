@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CICIDS2017 Analysis Suite - Web</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23065f46'/%3E%3Ctext x='50' y='64' text-anchor='middle' font-size='56' fill='white'%3EC%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+  <script src="app.js?v=9" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="kicker">CICIDS2017</p>
+      <h1>Pipeline + Analisis + Graficos en una sola pagina</h1>
+      <p class="hero__lead">
+        Version web derivada de tus tres scripts Python para ejecutar en servidor estatico.
+        Descarga los CSV en terminal desde repositorios publicos y luego procesalos localmente en la web,
+        usa
+        <span>classification_report.json</span> como insumo opcional.
+      </p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>1. Dataset local</h2>
+      <p>
+        Para evitar errores CORS del navegador, la pagina lee CSV locales desde la carpeta
+        <span>cicids2017_local_data</span>. Descargalos con el script Node del proyecto.
+      </p>
+      <div class="inputs">
+        <label class="file-input">
+          <span>classification_report.json (opcional)</span>
+          <input id="reportFile" type="file" accept=".json,application/json" />
+        </label>
+      </div>
+      <div class="actions">
+        <button id="downloadBtn">Procesar CSV locales</button>
+        <button id="demoBtn" class="secondary">Cargar demo rapida</button>
+      </div>
+      <div class="progress-wrap" aria-live="polite">
+        <div class="progress-head">
+          <strong id="progressLabel">En espera</strong>
+          <span id="progressPct">0%</span>
+        </div>
+        <progress id="progressBar" value="0" max="100"></progress>
+        <small id="progressMeta">Presiona "Procesar CSV locales" para iniciar.</small>
+      </div>
+      <pre id="log" class="log" aria-live="polite"></pre>
+    </section>
+
+    <section class="panel stats" id="summaryPanel">
+      <h2>2. Resumen del pipeline</h2>
+      <div class="cards" id="summaryCards"></div>
+    </section>
+
+    <section class="panel">
+      <h2>3. Chart 1 - Puertos x ataque</h2>
+      <p>Heatmap interactivo usando Top-20 puertos de destino.</p>
+      <div id="chart1" class="plot"></div>
+    </section>
+
+    <section class="panel">
+      <h2>4. Chart 2 - Distribucion de clases</h2>
+      <canvas id="chart2"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>5. Chart 3 - Matriz de confusion (estimada)</h2>
+      <p>
+        En entorno web estatico no se ejecuta scikit-learn. Esta matriz se aproxima desde
+        <span>recall</span> del JSON, igual que el fallback de tu script Python.
+      </p>
+      <div id="chart3" class="plot"></div>
+    </section>
+
+    <section class="panel">
+      <h2>6. Chart 4 - Metricas por clase</h2>
+      <canvas id="chart4"></canvas>
+    </section>
+  </main>
+</body>
+</html>

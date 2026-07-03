@@ -1,0 +1,6 @@
+﻿.venv/
+node_modules/
+cicids2017_local_data/
+cicids2017_outputs/
+__pycache__/
+*.pyc
