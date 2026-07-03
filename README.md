@@ -12,8 +12,10 @@ node prepare_dataset.mjs
 2. Generar el reporte de clasificacion y artefactos del modelo:
 
 ```bash
-c:/Users/josue/source/repos/Entregable-4/.venv/Scripts/python.exe "./cicids2017_pipeline_local (1).py"
+python "./cicids2017_pipeline_local (1).py"
 ```
+
+Si tu entorno usa un ejecutable distinto, utiliza el Python activo de tu sistema o entorno virtual.
 
 3. Iniciar el servidor estatico:
 
@@ -95,8 +97,10 @@ Resultado esperado: creacion o actualizacion de archivos CSV en [cicids2017_loca
 Para habilitar los graficos de metricas del modelo, ejecutar el pipeline Python:
 
 ```bash
-c:/Users/josue/source/repos/Entregable-4/.venv/Scripts/python.exe "./cicids2017_pipeline_local (1).py"
+python "./cicids2017_pipeline_local (1).py"
 ```
+
+Si estas dentro de un entorno virtual, este comando usara automaticamente el interprete de ese entorno.
 
 Resultado esperado: archivo [cicids2017_outputs/classification_report.json](cicids2017_outputs/classification_report.json) y demas artefactos de salida.
 
