@@ -1,5 +1,28 @@
 # Suite Web de Analisis CICIDS2017 para Entorno Local
 
+## Guia rapida de recreacion
+Para reconstruir el entorno completo desde cero, ejecutar los siguientes pasos en orden:
+
+1. Descargar los CSV del dataset en local:
+
+```bash
+node prepare_dataset.mjs
+```
+
+2. Generar el reporte de clasificacion y artefactos del modelo:
+
+```bash
+c:/Users/josue/source/repos/Entregable-4/.venv/Scripts/python.exe "./cicids2017_pipeline_local (1).py"
+```
+
+3. Iniciar el servidor estatico:
+
+```bash
+npx serve . -l 3000
+```
+
+4. Abrir http://localhost:3000, pulsar Procesar CSV locales y, de forma opcional, cargar [cicids2017_outputs/classification_report.json](cicids2017_outputs/classification_report.json) para habilitar Chart 3 y Chart 4.
+
 ## Resumen ejecutivo
 Este proyecto integra, en una aplicacion web estatica, las funcionalidades principales de preparacion de datos, analisis exploratorio y visualizacion de resultados sobre el dataset CICIDS2017. La propuesta nace de una transformacion de scripts Python a una interfaz de uso directo en navegador, con enfasis en reproducibilidad local, trazabilidad del procesamiento y estabilidad frente a grandes volumenes de datos.
 
@@ -58,7 +81,7 @@ Este enfoque permite ejecutar analisis de gran tamano con mayor robustez en ento
 3. Carpeta de datos locales: [cicids2017_local_data](cicids2017_local_data)
 4. Salidas de pipeline Python: [cicids2017_outputs](cicids2017_outputs)
 
-## Procedimiento de ejecucion recomendado
+## Procedimiento de ejecucion recomendado (detalle)
 ### 1. Descargar dataset en local
 Desde la carpeta raiz del proyecto, ejecutar:
 
